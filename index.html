@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SwasthyaLink | Smart Hospital & Digital Healthcare Ecosystem</title>
+  
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Header Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand" onclick="window.app.showPublicView(); return false;">
+        <div class="brand-icon">✚</div>
+        <div>
+          SwasthyaLink
+          <span style="display:block; font-size:0.68rem; font-weight:600; color:var(--primary); text-transform:uppercase; letter-spacing:0.06em;">Smart Hospital Ecosystem</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services" class="nav-link">Ecosystem</a></li>
+        <li><a href="#doctors" class="nav-link">Find Doctors</a></li>
+        <li><a href="#queue" class="nav-link">Live Queue</a></li>
+        <li><a href="#pharmacy" class="nav-link">Compare Medicines</a></li>
+        <li><a href="#wearable" class="nav-link">IoT Health Band</a></li>
+        <li><a href="#research" class="nav-link">Research Paper</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="soundToggleBtn" class="btn btn-secondary btn-sm" onclick="window.app.toggleSound()" title="Toggle Audio Chimes">🔔 Sound ON</button>
+        <button id="themeToggleBtn" class="btn btn-secondary btn-icon btn-sm" onclick="window.app.toggleTheme()" title="Toggle Theme">🌙</button>
+        <button class="btn btn-primary" onclick="window.app.showPortalView('patient')">Launch Hospital Portal ➔</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Role Switcher Banner (Floating Quick Access) -->
+  <div class="role-switcher-banner">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="status-dot"></span>
+        <span><strong>Live Hospital System:</strong> Test Role-Based Dashboards:</span>
+      </div>
+      <div class="role-chips">
+        <button class="role-chip active" data-role="patient" onclick="window.app.showPortalView('patient')">👤 Patient (Aarav)</button>
+        <button class="role-chip" data-role="doctor" onclick="window.app.showPortalView('doctor')">👨‍⚕️ Doctor (Dr. Sharma)</button>
+        <button class="role-chip" data-role="reception" onclick="window.app.showPortalView('reception')">🛎️ Front Desk / Queue</button>
+        <button class="role-chip" data-role="pharmacy" onclick="window.app.showPortalView('pharmacy')">💊 CityCare Pharmacy</button>
+        <button class="role-chip" data-role="admin" onclick="window.app.showPortalView('admin')">⚙️ Hospital Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PUBLIC SHOWCASE VIEW
+       ========================================================================= -->
+  <div id="showcaseView">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge badge-primary" style="margin-bottom: 1rem;">
+            ✦ Concept Proposal & Smart Hospital Prototype
+          </div>
+          <h1>
+            Healthcare is harder to reach than it should be. <br>
+            <span>We connect the pieces.</span>
+          </h1>
+          <p class="hero-lead">
+            An integrated digital healthcare platform connecting patients with verified doctors, live OPD queue tokens, digital health records, pharmacy price comparisons, and an optional IoT emergency health band.
+          </p>
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg" onclick="window.app.showPortalView('patient')">
+              Enter Interactive Hospital Portal ➔
+            </button>
+            <a href="#doctors" class="btn btn-secondary btn-lg">
+              🔍 Find Doctor & Compare Fees
+            </a>
+          </div>
+          <div class="hero-badges">
+            <div class="hero-badge-item">✓ <strong>No App-only Lock:</strong> Core lives on web & mobile</div>
+            <div class="hero-badge-item">✓ <strong>Optional Band:</strong> Works with or without wearable</div>
+            <div class="hero-badge-item">✓ <strong>Zero Queues:</strong> Live OPD token tracker</div>
+          </div>
+        </div>
+
+        <!-- Live OPD Token Interactive Display -->
+        <div class="hero-token-card">
+          <div class="token-subhead">Current Hospital Live Queue</div>
+          <div class="token-meta">OPD Room A-101 · Dr. Rohan Sharma</div>
+          <div class="token-huge" id="heroTokenNumber">12</div>
+          <div class="token-meta">
+            Currently in consultation · <strong id="heroWaitingCount">2</strong> patients waiting in line
+          </div>
+          <div class="token-progress-bar">
+            <div class="token-progress-fill"></div>
+          </div>
+          <div class="token-quick-actions">
+            <button class="btn btn-outline btn-sm" onclick="window.app.showPortalView('reception')">
+              🎫 Check-In For Token
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="window.app.showPortalView('doctor')">
+              👨‍⚕️ Open Doctor Room
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Bar -->
+    <section class="metrics-bar">
+      <div class="container metrics-grid">
+        <div class="metric-item">
+          <b>6</b>
+          <span>Medical Specialties</span>
+        </div>
+        <div class="metric-item">
+          <b>-54%</b>
+          <span>Waiting Room Congestion</span>
+        </div>
+        <div class="metric-item">
+          <b>Up to 45%</b>
+          <span>Medicine Price Savings</span>
+        </div>
+        <div class="metric-item">
+          <b>15s</b>
+          <span>Safety Countdown SOS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem & Solution Overview -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The Healthcare Challenge & Solution</span>
+          <h2>A Unified Digital Health Ecosystem</h2>
+          <p class="section-subtitle">Fragmented paper records, unknown doctor fees, and crowded waiting rooms solved in one integrated application.</p>
+        </div>
+
+        <!-- Ecosystem Tabs -->
+        <div class="eco-tabs-nav">
+          <button class="eco-tab-btn active" data-tab="patient">📱 Mobile & Web App</button>
+          <button class="eco-tab-btn" data-tab="hospital">🏥 Smart Hospital Suite</button>
+          <button class="eco-tab-btn" data-tab="pharmacy">💊 Medicine Marketplace</button>
+          <button class="eco-tab-btn" data-tab="wearable">⌚ Optional Health Band</button>
+          <button class="eco-tab-btn" data-tab="ai">🤖 AI Care Assistant</button>
+        </div>
+
+        <!-- Panel 1: Patient App -->
+        <div class="eco-tab-panel active" id="tab-patient">
+          <div>
+            <h3>The Patient Foundation</h3>
+            <p>Everything a patient needs, from finding a doctor to getting medicines and tracking prescriptions, lives in the core platform—no wearable required.</p>
+            <ul class="eco-feature-list">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">1</div>
+                <div>
+                  <strong>Doctor Discovery & Fee Transparency</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Search by speciality, location, and compare consultation fees side-by-side before booking.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">2</div>
+                <div>
+                  <strong>Digital Health Records & Prescriptions</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Access past diagnosis notes, lab tests, and doctor e-prescriptions securely anywhere.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">3</div>
+                <div>
+                  <strong>Interactive Dose Reminders</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Timely reminders for prescribed medicines, follow-up dates, and appointment alerts.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card" style="background: linear-gradient(135deg, rgba(13,148,136,0.06), rgba(2,132,199,0.06)); border-color: var(--primary);">
+            <h4>Today's Patient Care Plan</h4>
+            <p class="text-muted" style="font-size: 0.9rem;">Interactive preview of patient mobile experience:</p>
+            <div class="dose-list">
+              <div class="dose-card taken">
+                <div>
+                  <strong>Amoxicillin 500mg</strong>
+                  <div style="font-size:0.8rem; color:var(--text-muted)">Morning dose @ 09:00 AM · After food</div>
+                </div>
+                <span class="badge badge-success">✓ Taken</span>
+              </div>
+              <div class="dose-card">
+                <div>
+                  <strong>Paracetamol 500mg</strong>
+                  <div style="font-size:0.8rem; color:var(--text-muted)">Afternoon dose @ 02:00 PM · With water</div>
+                </div>
+                <span class="badge badge-warning">Due Soon</span>
+              </div>
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <button class="btn btn-primary btn-sm" onclick="window.app.showPortalView('patient')">Open Full Patient Dashboard ➔</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Hospital Suite -->
+        <div class="eco-tab-panel" id="tab-hospital">
+          <div>
+            <h3>Hospital Operations & Live Queue Management</h3>
+            <p>Organises outpatient visits, prevents overlapping doctor bookings, eliminates physical lines with digital token issuance, and maintains structured clinical records.</p>
+            <ul class="eco-feature-list">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">🎫</div>
+                <div>
+                  <strong>Digital OPD Queue Tokens</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Patients receive a numbered token upon check-in; monitors display real-time calling order.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">📝</div>
+                <div>
+                  <strong>Doctor Clinical Notes & e-Prescription</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Attending doctors review authorised medical history and enter diagnosis and medicine regimen.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">💳</div>
+                <div>
+                  <strong>Integrated Billing & Accounts</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Automatic billing item generation for consultation, diagnostic tests, and payment receipts.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Live OPD Doctor Consultation View</h4>
+            <div style="padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md); margin: 1rem 0;">
+              <div style="display:flex; justify-content:space-between;">
+                <strong>Token #12: Aarav Singh</strong>
+                <span class="badge badge-warning">In Consultation</span>
+              </div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;">Chief Complaint: Cough and evening fever for 3 days</div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="window.app.showPortalView('doctor')">View Doctor Workspace ➔</button>
+          </div>
+        </div>
+
+        <!-- Panel 3: Pharmacy Marketplace -->
+        <div class="eco-tab-panel" id="tab-pharmacy">
+          <div>
+            <h3>Medicine Price Comparison & Inventory</h3>
+            <p>Compare medicine prices and genuine availability across partner pharmacies in real time. Avoid unnecessary travel and unverified price markups.</p>
+            <ul class="eco-feature-list">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">🔍</div>
+                <div>
+                  <strong>Transparent Price Comparison</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Search essential drugs by generic formulation or brand name across Jan Aushadhi and retail chemists.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">📜</div>
+                <div>
+                  <strong>Prescription-Linked Ordering</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Attach doctor e-prescriptions directly to fulfill schedule H and prescription-only medications.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">📦</div>
+                <div>
+                  <strong>Live Stock Tracking & Low-Stock Alerts</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Pharmacies manage their inventory catalogue with automatic low-stock warnings (&lt;20 units).</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Verified Pharmacy Partners</h4>
+            <p class="text-muted" style="font-size:0.9rem;">Partner pharmacies in Muzaffarnagar:</p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
+              <li>🏥 <strong>CityCare Pharmacy</strong> (In-hospital OPD, 24 Hours, Live Stock)</li>
+              <li>💊 <strong>Jan Aushadhi Kendra</strong> (Civil Lines, Low-cost Generics)</li>
+              <li>🏪 <strong>MediPlus Chemist</strong> (Delhi Road, Fast delivery)</li>
+            </ul>
+            <div style="margin-top: 1rem;">
+              <a href="#pharmacy" class="btn btn-primary btn-sm">Explore Medicine Prices ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Wearable Band -->
+        <div class="eco-tab-panel" id="tab-wearable">
+          <div>
+            <h3>Optional IoT Healthcare Band (Concept)</h3>
+            <p>An accessible wrist wearable powered by an ESP32 microcontroller and MAX30102 optical sensor. It extends the core mobile app with heart rate monitoring, pulse oximetry, and an SOS button.</p>
+            <ul class="eco-feature-list">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">💓</div>
+                <div>
+                  <strong>Optical Heart Rate & SpO₂ Sensing</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Dual-wavelength photoplethysmography (PPG) for experimental pulse and blood oxygen saturation.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">🚨</div>
+                <div>
+                  <strong>Physical One-Touch SOS Button</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Triggers immediate Bluetooth alert to smartphone with safety countdown and emergency contact routing.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card" style="text-align:center;">
+            <h4>Interactive Wearable Simulator</h4>
+            <p class="text-muted" style="font-size:0.85rem">See real-time PPG arterial pulse waveform & experimental metrics:</p>
+            <a href="#wearable" class="btn btn-outline btn-sm">Jump to Live Band Simulator ↓</a>
+          </div>
+        </div>
+
+        <!-- Panel 5: AI Assistant -->
+        <div class="eco-tab-panel" id="tab-ai">
+          <div>
+            <h3>AI Care Assistant & Reminders</h3>
+            <p>Smart, assistive support with human clinical oversight to guide patients through post-consultation care plans and plain-language report summaries.</p>
+            <ul class="eco-feature-list">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">💬</div>
+                <div>
+                  <strong>Plain-Language Medical Summaries</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Translates clinical notes into simple explanations of diagnosis, medicines, and lifestyle advice.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">🛡️</div>
+                <div>
+                  <strong>Assistive, Not Diagnostic</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Does not replace clinical judgement. All treatment decisions require qualified doctor review.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card" style="background: var(--bg-tertiary);">
+            <h4>Sample AI Care Summary</h4>
+            <blockquote style="font-size:0.9rem; font-style:italic; border-left:3px solid var(--primary); padding-left:1rem; margin:1rem 0;">
+              "Dr. Sharma diagnosed an Upper Respiratory Infection. You should take Amoxicillin twice daily for 5 days after food. Stay hydrated and rest. If fever exceeds 100°F, use Paracetamol as prescribed."
+            </blockquote>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Doctor Discovery & Specialty Matcher -->
+    <section class="section" id="doctors">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Smart Doctor Directory</span>
+          <h2>Find the Right Doctor & Compare Fees</h2>
+          <p class="section-subtitle">Search by health concern or select a symptom chip for instant specialty recommendation.</p>
+        </div>
+
+        <!-- Symptom Chips -->
+        <div class="symptom-chips">
+          <span class="text-muted" style="align-self: center; font-size: 0.85rem; font-weight: 600;">Popular Concerns:</span>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('fever cough', this)">🤒 Fever & Cough</button>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('chest pressure heart', this)">❤️ Chest Discomfort / BP</button>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('migraine headache', this)">🧠 Headache & Migraine</button>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('knee joint pain', this)">🦴 Joint & Knee Pain</button>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('skin rash allergy', this)">🌿 Skin Rash & Itch</button>
+          <button class="symptom-chip" onclick="window.app.onSymptomClick('child infant', this)">👶 Child Health & Fever</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-box-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="doctorSearchInput" class="search-input" placeholder="Search doctor by name, specialty, or describe your concern..." oninput="window.app.onDoctorSearchInput(this.value)">
+          </div>
+        </div>
+
+        <div id="symptomMatchNote" style="text-align: center; margin-bottom: 2rem; font-size: 0.95rem; color: var(--primary);"></div>
+
+        <!-- Doctors Grid -->
+        <div class="doctors-grid" id="doctorsGrid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+          ⚠️ <em>Doctor recommendations are directory-based suggestions, not medical diagnoses or substitutes for clinical evaluation.</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live OPD Queue Tracker -->
+    <section class="section" id="queue" style="background-color: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Zero-Crowd Waiting</span>
+          <h2>Live OPD Queue & Token Tracking</h2>
+          <p class="section-subtitle">Arrive just in time. Track your queue position and token status from anywhere on your smartphone.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+          <div>
+            <h3>How Live Queue Tokens Work</h3>
+            <p>In traditional hospitals, patients wait 2 to 4 hours in crowded waiting halls without knowing when they will be called. SwasthyaLink replaces the crowd with digital transparency.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+              <div style="display: flex; gap: 1rem;">
+                <div class="eco-icon-box">1</div>
+                <div>
+                  <strong>Book Appointment or Walk-in</strong>
+                  <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Appointments automatically check in on arrival, or reception issues a walk-in token.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem;">
+                <div class="eco-icon-box">2</div>
+                <div>
+                  <strong>Live Progress on Your Phone</strong>
+                  <p class="text-muted" style="margin: 0; font-size: 0.9rem;">See exactly how many patients are ahead of you and the current token being examined.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem;">
+                <div class="eco-icon-box">3</div>
+                <div>
+                  <strong>Audible Melodic Chime When Called</strong>
+                  <p class="text-muted" style="margin: 0; font-size: 0.9rem;">A pleasant hospital bell alerts you when the doctor is ready for your consultation.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+              <button class="btn btn-primary" onclick="window.app.showPortalView('reception')">
+                Open Queue Reception Desk ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Queue Board Card -->
+          <div class="card" style="border: 2px solid var(--border-light); padding: 2rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+              <h4>OPD Waiting Hall Monitor</h4>
+              <span class="status-pill"><span class="status-dot"></span> Live Feed</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); text-align: center;">
+                <span class="text-muted" style="font-size:0.8rem">NOW CALLING</span>
+                <div style="font-size: 3rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono);">
+                  #12
+                </div>
+                <small style="color:var(--text-muted)">Dr. Rohan Sharma</small>
+              </div>
+              <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); text-align: center;">
+                <span class="text-muted" style="font-size:0.8rem">NEXT IN LINE</span>
+                <div style="font-size: 3rem; font-weight: 800; color: var(--text-main); font-family: var(--font-mono);">
+                  #13
+                </div>
+                <small style="color:var(--text-muted)">Dr. Anita Gupta</small>
+              </div>
+            </div>
+
+            <div style="text-align: center;">
+              <button class="btn btn-outline btn-sm" onclick="playTokenChime()">
+                🔔 Test Melodic Token Chime
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Medicine Price Comparison -->
+    <section class="section" id="pharmacy">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Price Transparency</span>
+          <h2>Cross-Pharmacy Medicine Price Comparison</h2>
+          <p class="section-subtitle">Compare prices and genuine stock across licensed partner pharmacies and Jan Aushadhi Kendras.</p>
+        </div>
+
+        <div class="search-box-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">💊</span>
+            <input type="text" class="search-input" placeholder="Search medicine (e.g. Paracetamol, Amoxicillin, Metformin, Atorvastatin)..." oninput="window.app.onMedicineSearchInput(this.value)">
+          </div>
+        </div>
+
+        <div class="pharmacy-table-wrap">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>Medicine & Strength</th>
+                <th>Pharmacy & Type</th>
+                <th>Retail Price</th>
+                <th>Stock Status</th>
+                <th>Phone</th>
+                <th>Last Update</th>
+              </tr>
+            </thead>
+            <tbody id="pharmacyComparisonBody">
+              <!-- Populated dynamically via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; gap: 1rem;">
+          <div>ℹ️ Only CityCare Pharmacy live inventory is edited directly in this prototype. Partner listings use verified benchmark sample data.</div>
+          <button class="btn btn-outline btn-sm" onclick="window.app.showPortalView('pharmacy')">Manage Pharmacy Inventory ➔</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wearable Band Showcase & Canvas Simulation -->
+    <section class="section" id="wearable">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">IoT Hardware Concept</span>
+          <h2>SwasthyaLink Healthcare Band</h2>
+          <p class="section-subtitle">An accessible wrist wearable combining an ESP32 microcontroller with a MAX30102 pulse-oximetry sensor.</p>
+        </div>
+
+        <div class="wearable-container">
+          <!-- Physical Mockup & Interactive Display -->
+          <div class="band-mockup">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; font-size:0.8rem; color:#94a3b8;">
+              <span>SWASTHYALINK BAND v1.0</span>
+              <span>🔋 94% · BLE CONNECTED</span>
+            </div>
+
+            <div class="band-screen">
+              <div class="band-vitals-row">
+                <div class="band-vital-item">
+                  <div class="band-vital-val red" id="bandPulseVal">72</div>
+                  <div class="band-vital-lbl">Heart Rate (BPM)</div>
+                </div>
+                <div class="band-vital-item">
+                  <div class="band-vital-val cyan" id="bandSpO2Val">98%</div>
+                  <div class="band-vital-lbl">Blood Oxygen (SpO₂)</div>
+                </div>
+              </div>
+
+              <!-- Animated Arterial Pulse Canvas -->
+              <div class="ecg-canvas-wrap">
+                <div style="font-size:0.65rem; color:#64748b; margin-bottom:2px; font-family:var(--font-mono)">LIVE PPG ARTERIAL WAVEFORM</div>
+                <canvas id="ecgCanvas"></canvas>
+              </div>
+
+              <div class="band-sos-btn-wrap">
+                <button class="band-physical-sos" onclick="window.app.triggerSOSModal()">
+                  HOLD SOS
+                </button>
+                <div style="font-size:0.7rem; color:#94a3b8; margin-top:0.4rem;">One-touch physical emergency trigger</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Description & Disclaimer -->
+          <div>
+            <h3>Accessible Wearable Engineering</h3>
+            <p>While smartwatches often cost ₹15,000–₹40,000, our concept prototype is built using commodity open-source embedded electronics designed for under ₹1,200.</p>
+            
+            <ul class="eco-feature-list" style="margin: 1.5rem 0;">
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">⚡</div>
+                <div>
+                  <strong>ESP32 Microcontroller</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Low-power dual-core processor with integrated Bluetooth Low Energy (BLE) and Wi-Fi.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">💡</div>
+                <div>
+                  <strong>MAX30102 High-Sensitivity Pulse Oximeter</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">Red and Infrared LEDs with photodetector to measure reflected PPG light curves.</p>
+                </div>
+              </li>
+              <li class="eco-feature-item">
+                <div class="eco-icon-box">🛡️</div>
+                <div>
+                  <strong>False-Alarm Protected SOS</strong>
+                  <p class="text-muted" style="margin:0; font-size:0.9rem">A single press triggers a 15-second phone countdown with Cancel button to eliminate accidental alarms.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="note" style="background: var(--warning-light); color: var(--warning-text); border-left: 4px solid var(--warning); padding: 0.85rem; border-radius: var(--radius-sm); font-size: 0.85rem;">
+              <strong>Academic & Clinical Disclaimer:</strong> Readings are experimental and designed for wellness/research demonstration, not clinical diagnosis. Blood pressure is not measured.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency SOS Workflow Simulation -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Emergency Response</span>
+          <h2>The 5-Step SOS Safety Protocol</h2>
+          <p class="section-subtitle">How SwasthyaLink balances rapid emergency dispatch with strict false-alarm safeguards.</p>
+        </div>
+
+        <div class="cols" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;">
+          <div class="card">
+            <div class="eco-icon-box" style="margin-bottom:0.75rem;">1</div>
+            <h4>Trigger SOS</h4>
+            <p class="text-muted" style="font-size:0.85rem">Tap the in-app emergency button or hold the wearable band button.</p>
+          </div>
+          <div class="card">
+            <div class="eco-icon-box" style="margin-bottom:0.75rem;">2</div>
+            <h4>15s Safety Countdown</h4>
+            <p class="text-muted" style="font-size:0.85rem">Configurable timer with prominent "Cancel – I'm OK" option for accidental activation.</p>
+          </div>
+          <div class="card">
+            <div class="eco-icon-box" style="margin-bottom:0.75rem;">3</div>
+            <h4>Automatic Decision</h4>
+            <p class="text-muted" style="font-size:0.85rem">If confirmed, alert is sent. If user does not respond before timeout, escalated as UNCONFIRMED EMERGENCY.</p>
+          </div>
+          <div class="card">
+            <div class="eco-icon-box" style="margin-bottom:0.75rem;">4</div>
+            <h4>GPS & Contacts Alerted</h4>
+            <p class="text-muted" style="font-size:0.85rem">Coordinates and emergency contact notifications dispatched in real time.</p>
+          </div>
+          <div class="card">
+            <div class="eco-icon-box" style="margin-bottom:0.75rem;">5</div>
+            <h4>Provider Triage</h4>
+            <p class="text-muted" style="font-size:0.85rem">Hospital emergency command center acknowledges and dispatches assistance.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <button class="btn btn-danger btn-lg" onclick="window.app.triggerSOSModal()">
+            🚨 Test Live Emergency SOS Countdown
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Paper & Architecture Hub -->
+    <section class="section" id="research">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Academic Research Hub</span>
+          <h2>Smart Hospital Management System Specifications</h2>
+          <p class="section-subtitle">Structured academic prototype specifications: Architecture, Role-Based Access, and 5-Member Engineering division.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+          <div class="card">
+            <h3>4-Layer System Architecture</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+              <div style="background: var(--bg-tertiary); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 4px solid var(--primary);">
+                <strong>1. Presentation Layer (Role-Based GUI)</strong>
+                <div style="font-size: 0.85rem; color: var(--text-muted)">Java Swing desktop interfaces & responsive web dashboards tailored to each role.</div>
+              </div>
+              <div style="background: var(--bg-tertiary); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 4px solid var(--accent);">
+                <strong>2. Application Layer (Validation & Rules)</strong>
+                <div style="font-size: 0.85rem; color: var(--text-muted)">Double-booking prevention, token state machines, triage escalation algorithms.</div>
+              </div>
+              <div style="background: var(--bg-tertiary); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 4px solid var(--warning);">
+                <strong>3. Connectivity Layer (JDBC Driver)</strong>
+                <div style="font-size: 0.85rem; color: var(--text-muted)">Parameterized SQL queries, secure connection pooling, transaction isolation.</div>
+              </div>
+              <div style="background: var(--bg-tertiary); padding: 0.85rem; border-radius: var(--radius-sm); border-left: 4px solid var(--success);">
+                <strong>4. Data Layer (Relational MySQL Database)</strong>
+                <div style="font-size: 0.85rem; color: var(--text-muted)">Structured entities: Users, Patients, Doctors, Appointments, EHR, Prescriptions, Bills, SOS.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>5-Member Engineering Team Work Division</h3>
+            <table class="table-custom" style="font-size: 0.85rem;">
+              <thead>
+                <tr>
+                  <th>Member</th>
+                  <th>Assigned Modules & Responsibilities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Member 1</strong></td>
+                  <td>Patient registration, profile management, medical records, and patient portal view.</td>
+                </tr>
+                <tr>
+                  <td><strong>Member 2</strong></td>
+                  <td>Doctor directory, department mapping, speciality-based discovery, and appointment booking.</td>
+                </tr>
+                <tr>
+                  <td><strong>Member 3</strong></td>
+                  <td>Token queue state machine, check-in, consultation notes, and e-prescription builder.</td>
+                </tr>
+                <tr>
+                  <td><strong>Member 4</strong></td>
+                  <td>SOS workflow, emergency contacts, GPS geocoding demonstration, and hospital finder.</td>
+                </tr>
+                <tr>
+                  <td><strong>Member 5</strong></td>
+                  <td>MySQL schema design, authentication & RBAC, pharmacy & billing integration, shared testing.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Testing Strategy & Verification Matrix</h3>
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>Test Case</th>
+                <th>Test Action</th>
+                <th>Expected Result</th>
+                <th>Verification Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Authentication</strong></td>
+                <td>Sign in with valid/invalid role credentials</td>
+                <td>Routes to permitted dashboard; rejects unauthorized roles</td>
+                <td><span class="badge badge-success">Passed</span></td>
+              </tr>
+              <tr>
+                <td><strong>Appointment Collision</strong></td>
+                <td>Attempt booking identical doctor and slot</td>
+                <td>Blocks double booking; prompts alternative time</td>
+                <td><span class="badge badge-success">Passed</span></td>
+              </tr>
+              <tr>
+                <td><strong>Queue State Machine</strong></td>
+                <td>Move token: Waiting → Called → In Consultation → Done</td>
+                <td>Status synchronized across doctor & patient views with chime</td>
+                <td><span class="badge badge-success">Passed</span></td>
+              </tr>
+              <tr>
+                <td><strong>SOS Cancel / Timeout</strong></td>
+                <td>Cancel during 15s countdown vs allow timeout</td>
+                <td>Cancelled: suppressed; Timeout: marked UNCONFIRMED EMERGENCY</td>
+                <td><span class="badge badge-success">Passed</span></td>
+              </tr>
+              <tr>
+                <td><strong>Pharmacy Dispensing</strong></td>
+                <td>Dispense medicine linked to prescription</td>
+                <td>Stock decremented; low stock flagged when &lt;20 units</td>
+                <td><span class="badge badge-success">Passed</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom: 1rem;">
+              <div class="brand-icon">✚</div>
+              SwasthyaLink
+            </div>
+            <p>One unified digital healthcare platform connecting patients, doctors, hospitals, pharmacies, and IoT assistance.</p>
+            <div style="font-size:0.85rem; color:var(--text-subtle);">
+              Muzaffarnagar Hospital Prototype · Academic Session 2026–2027
+            </div>
+          </div>
+          <div>
+            <h4>Hospital Roles</h4>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
+              <li><a href="#" onclick="window.app.showPortalView('patient'); return false;">Patient Portal</a></li>
+              <li><a href="#" onclick="window.app.showPortalView('doctor'); return false;">Doctor Consultation</a></li>
+              <li><a href="#" onclick="window.app.showPortalView('reception'); return false;">Reception & Queue</a></li>
+              <li><a href="#" onclick="window.app.showPortalView('pharmacy'); return false;">Pharmacy Counter</a></li>
+              <li><a href="#" onclick="window.app.showPortalView('admin'); return false;">Hospital Administrator</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Quick Links</h4>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.9rem;">
+              <li><a href="#services">Platform Ecosystem</a></li>
+              <li><a href="#doctors">Find a Doctor</a></li>
+              <li><a href="#queue">Live OPD Queue</a></li>
+              <li><a href="#pharmacy">Medicine Prices</a></li>
+              <li><a href="#wearable">IoT Health Band</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Emergency Notice</h4>
+            <div class="note" style="background: var(--danger-light); color: var(--danger-text); padding: 1rem; border-radius: var(--radius-md); font-size: 0.85rem;">
+              <strong>In a life-threatening medical emergency, call 112 immediately.</strong> The SOS feature in this prototype is an engineering simulation.
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>© 2026 SwasthyaLink Smart Hospital Management System. Open academic research prototype.</div>
+          <div>Designed with privacy-by-design & synthetic clinical datasets.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================================
+       INTERNAL ROLE-BASED HOSPITAL MANAGEMENT PORTAL VIEW
+       ========================================================================= -->
+  <div id="appView">
+    <div class="portal-layout">
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; padding:0 0.5rem;">
+          <a href="#" onclick="window.app.showPublicView(); return false;" class="brand" style="font-size:1.1rem;">
+            <div class="brand-icon" style="width:28px; height:28px; font-size:1rem;">✚</div>
+            SwasthyaLink
+          </a>
+          <button class="btn btn-secondary btn-sm" onclick="window.app.showPublicView()">Exit Portal</button>
+        </div>
+
+        <!-- User Profile Pill -->
+        <div id="portalUserBadge" class="portal-user-badge"></div>
+
+        <!-- Navigation Buttons -->
+        <nav id="portalNavButtons" style="display: flex; flex-direction: column; gap: 0.35rem;"></nav>
+
+        <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <button class="btn btn-outline btn-sm" style="width:100%;" onclick="window.app.showPublicView()">
+            ← Back to Public Website
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Portal Workspace -->
+      <main class="portal-main" id="portalMainContent">
+        <!-- Rendered dynamically by active tab in JS -->
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS & OVERLAYS
+       ========================================================================= -->
+
+  <!-- Quick Appointment Booking Modal -->
+  <div id="bookingModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3>Book OPD Doctor Appointment</h3>
+        <button class="btn btn-secondary btn-sm" onclick="window.app.closeBookingModal()">✕</button>
+      </div>
+
+      <form onsubmit="window.app.submitBooking(event)">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label">Select Doctor & Department</label>
+          <select id="bookingDoctorSelect" class="form-control" name="did" required></select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Appointment Date</label>
+            <input type="date" id="bookingDateInput" class="form-control" name="date" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Available Time Slot</label>
+            <select class="form-control" name="time" required>
+              <option value="09:00">09:00 AM</option>
+              <option value="09:30">09:30 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="10:30" selected>10:30 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="11:30">11:30 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="14:00">02:00 PM</option>
+              <option value="15:00">03:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="form-label">Chief Health Concern / Symptoms</label>
+          <input type="text" class="form-control" name="reason" placeholder="e.g. Headache, joint pain, routine evaluation" required>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" onclick="window.app.closeBookingModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm & Book Slot</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Fullscreen Emergency SOS Overlay -->
+  <div id="sosOverlay" class="sos-overlay" style="display: none;">
+    <div class="sos-dialog">
+      <div class="badge badge-danger" style="margin-bottom: 0.5rem;">EMERGENCY SOS INITIATED</div>
+      <h2>Safety Confirmation Countdown</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        An emergency alert is about to be transmitted with your GPS coordinates.
+      </p>
+
+      <div class="sos-countdown-ring" id="sosCountdownNumber">15</div>
+
+      <p style="font-size: 0.9rem; margin-bottom: 1.75rem;">
+        If you pressed this accidentally, tap Cancel now.<br>
+        <strong>If no response occurs, an UNCONFIRMED EMERGENCY is automatically escalated.</strong>
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-danger btn-lg" onclick="window.app.confirmEmergencyNow()">
+          🚨 Send Emergency Alert Now
+        </button>
+        <button class="btn btn-secondary btn-lg" onclick="window.app.cancelSOS()">
+          ✓ Cancel – I'm Safe
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+</body>
+</html>
